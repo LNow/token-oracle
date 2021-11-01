@@ -4,12 +4,15 @@ requirements = []
 
 [contracts.oracle]
 path = "contracts/oracle.clar"
-depends_on = []
+depends_on = ["nft-trait", "sip-010-trait-ft-standard"]
 
 [contracts.sample-nft]
 path = "contracts/samples/sample-nft.clar"
-depends_on = []
+depends_on = ["nft-trait"]
 
+[contracts.sample-ft]
+path = "contracts/samples/sample-ft.clar"
+depends_on = ["sip-010-trait-ft-standard"]
 
 # EXTERNAL CONTRACTS
 [contracts.sip-010-trait-ft-standard]
