@@ -1,0 +1,22 @@
+[project]
+name = "clarity-template"
+requirements = []
+
+[contracts.oracle]
+path = "contracts/oracle.clar"
+depends_on = []
+
+[contracts.sample-nft]
+path = "contracts/samples/sample-nft.clar"
+depends_on = []
+
+
+# EXTERNAL CONTRACTS
+[contracts.sip-010-trait-ft-standard]
+path = "contracts/external/sip-010-trait-ft-standard.clar"
+depends_on = []
+
+
+[contracts.nft-trait]
+path = "contracts/external/sip-009-nft-trait-standard.clar"
+depends_on = []
