@@ -13,7 +13,7 @@ beforeEach(() => {
   sampleNft = ctx.models.get(SampleNftModel);
 });
 
-describe("[ORACLE]", () => {
+describe("[ORACLE-nft]", () => {
   describe("is-nft-trusted()", () => {
     it("returns false for unknown nft", () => {
       oracle.isNftTrusted(sampleNft.address).expectBool(false);
