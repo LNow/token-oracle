@@ -17,4 +17,12 @@ export class OracleModel extends Model {
   addNft(nft: string, isTrusted: boolean, sender: string | Account) {
     return this.callPublic("add-nft", [types.principal(nft), types.bool(isTrusted)], sender)
   }
+
+  isFtTrusted(ft: string) {
+    return this.callReadOnly("is-ft-trusted", [types.principal(ft)]).result;
+  }
+
+  addFt(ft: string, isTrusted: boolean, sender: string | Account) {
+    return this.callPublic("add-ft", [types.principal(ft), types.bool(isTrusted)], sender);
+  }
 }
