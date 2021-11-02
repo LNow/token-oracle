@@ -6,6 +6,7 @@
 
 (use-trait nft-trait .nft-trait.nft-trait)
 (use-trait ft-trait .sip-010-trait-ft-standard.sip-010-trait)
+(impl-trait .oracle-trait.token-oracle)
 
 (define-map NftContracts
   principal
@@ -18,7 +19,7 @@
 )
 
 (define-read-only (is-nft-trusted (nft <nft-trait>))
-  (default-to false (map-get? NftContracts (contract-of nft)))
+  (ok (default-to false (map-get? NftContracts (contract-of nft))))
 )
 
 (define-public (add-nft (nft <nft-trait>) (isTrusted bool))
@@ -30,7 +31,7 @@
 )
 
 (define-read-only (is-ft-trusted (ft <ft-trait>))
-  (default-to false (map-get? FtContracts (contract-of ft)))
+  (ok (default-to false (map-get? FtContracts (contract-of ft))))
 )
 
 (define-public (add-ft (ft <ft-trait>) (isTrusted bool))
