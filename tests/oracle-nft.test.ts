@@ -16,7 +16,7 @@ beforeEach(() => {
 describe("[ORACLE-nft]", () => {
   describe("is-nft-trusted()", () => {
     it("returns false for unknown nft", () => {
-      oracle.isNftTrusted(sampleNft.address).expectBool(false);
+      oracle.isNftTrusted(sampleNft.address).expectOk().expectBool(false);
     });
   });
 
@@ -55,7 +55,7 @@ describe("[ORACLE-nft]", () => {
       ]).receipts[0];
 
       receipt.result.expectOk().expectBool(true);
-      oracle.isNftTrusted(nft).expectBool(isTrusted);
+      oracle.isNftTrusted(nft).expectOk().expectBool(isTrusted);
     });
 
     it("successfully saves contract as not trusted", () => {
@@ -68,7 +68,7 @@ describe("[ORACLE-nft]", () => {
       ]).receipts[0];
 
       receipt.result.expectOk().expectBool(true);
-      oracle.isNftTrusted(nft).expectBool(isTrusted);
+      oracle.isNftTrusted(nft).expectOk().expectBool(isTrusted);
     });
 
     it("successfully marks contract as trusted that was previously not trusted", () => {
@@ -76,14 +76,14 @@ describe("[ORACLE-nft]", () => {
       const nft = sampleNft.address;
       const isTrusted = true;
       ctx.chain.mineBlock([oracle.addNft(nft, !isTrusted, sender)]);
-      oracle.isNftTrusted(nft).expectBool(!isTrusted);
+      oracle.isNftTrusted(nft).expectOk().expectBool(!isTrusted);
 
       const receipt = ctx.chain.mineBlock([
         oracle.addNft(nft, isTrusted, sender),
       ]).receipts[0];
 
       receipt.result.expectOk().expectBool(true);
-      oracle.isNftTrusted(nft).expectBool(isTrusted);
+      oracle.isNftTrusted(nft).expectOk().expectBool(isTrusted);
     });
 
     it("successfully marks contract as not trusted that was previously trusted", () => {
@@ -91,14 +91,14 @@ describe("[ORACLE-nft]", () => {
       const nft = sampleNft.address;
       const isTrusted = false;
       ctx.chain.mineBlock([oracle.addNft(nft, !isTrusted, sender)]);
-      oracle.isNftTrusted(nft).expectBool(!isTrusted);
+      oracle.isNftTrusted(nft).expectOk().expectBool(!isTrusted);
 
       const receipt = ctx.chain.mineBlock([
         oracle.addNft(nft, isTrusted, sender),
       ]).receipts[0];
 
       receipt.result.expectOk().expectBool(true);
-      oracle.isNftTrusted(nft).expectBool(isTrusted);
+      oracle.isNftTrusted(nft).expectOk().expectBool(isTrusted);
     });
   });
 });

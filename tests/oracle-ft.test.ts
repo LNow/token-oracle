@@ -18,7 +18,7 @@ describe("[ORACLE-ft]", () => {
     it("returns false for unknown ft", () => {
       const ft = sampleFT.address;
 
-      oracle.isFtTrusted(ft).expectBool(false);
+      oracle.isFtTrusted(ft).expectOk().expectBool(false);
     });
   });
 
@@ -54,7 +54,7 @@ describe("[ORACLE-ft]", () => {
         .receipts[0];
 
       receipt.result.expectOk().expectBool(true);
-      oracle.isFtTrusted(ft).expectBool(isTrusted);
+      oracle.isFtTrusted(ft).expectOk().expectBool(isTrusted);
     });
 
     it("successfully saves contract as not trusted", () => {
@@ -66,7 +66,7 @@ describe("[ORACLE-ft]", () => {
         .receipts[0];
 
       receipt.result.expectOk().expectBool(true);
-      oracle.isFtTrusted(ft).expectBool(isTrusted);
+      oracle.isFtTrusted(ft).expectOk().expectBool(isTrusted);
     });
 
     it("successfully marks contract as trusted that was previously not trusted", () => {
@@ -74,13 +74,13 @@ describe("[ORACLE-ft]", () => {
       const ft = sampleFT.address;
       const isTrusted = true;
       ctx.chain.mineBlock([oracle.addFt(ft, !isTrusted, sender)]);
-      oracle.isFtTrusted(ft).expectBool(!isTrusted);
+      oracle.isFtTrusted(ft).expectOk().expectBool(!isTrusted);
 
       const receipt = ctx.chain.mineBlock([oracle.addFt(ft, isTrusted, sender)])
         .receipts[0];
 
       receipt.result.expectOk().expectBool(true);
-      oracle.isFtTrusted(ft).expectBool(isTrusted);
+      oracle.isFtTrusted(ft).expectOk().expectBool(isTrusted);
     });
 
     it("successfully marks contract as not trusted that was previously trusted", () => {
@@ -88,13 +88,13 @@ describe("[ORACLE-ft]", () => {
       const ft = sampleFT.address;
       const isTrusted = false;
       ctx.chain.mineBlock([oracle.addFt(ft, !isTrusted, sender)]);
-      oracle.isFtTrusted(ft).expectBool(!isTrusted);
+      oracle.isFtTrusted(ft).expectOk().expectBool(!isTrusted);
 
       const receipt = ctx.chain.mineBlock([oracle.addFt(ft, isTrusted, sender)])
         .receipts[0];
 
       receipt.result.expectOk().expectBool(true);
-      oracle.isFtTrusted(ft).expectBool(isTrusted);
+      oracle.isFtTrusted(ft).expectOk().expectBool(isTrusted);
     });
   });
 });

@@ -1,10 +1,15 @@
 [project]
 name = "clarity-template"
 requirements = []
+costs_version = 1
+
+[contracts.oracle-trait]
+path = "contracts/oracle-trait.clar"
+depends_on = []
 
 [contracts.oracle]
 path = "contracts/oracle.clar"
-depends_on = ["nft-trait", "sip-010-trait-ft-standard"]
+depends_on = ["nft-trait", "sip-010-trait-ft-standard", "oracle-trait"]
 
 [contracts.sample-nft]
 path = "contracts/samples/sample-nft.clar"
